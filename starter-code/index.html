@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="reddItApp">
   <head>
     <meta charset="utf-8">
     <title>Reddit Dashboard</title>
@@ -10,9 +10,9 @@
     <script src="js/app.js"></script>
   </head>
 
-  <body ng-app="reddItApp">
+  <body ng-controller="reddItCtrl">
 
-    <nav class="navbar navbar-inverse navbar-fixed-top" ng-controller="reddItCtrl">
+    <nav class="navbar navbar-inverse navbar-fixed-top" >
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -34,7 +34,7 @@
       </div>
     </nav>
 
-    <div class="container-fluid" >
+    <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <h4>History</h4>
@@ -76,20 +76,20 @@
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th>#</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
+                  <th>Ups</th>
+                  <th>Title</th>
+                  <th>IMG</th>
+                  <th>Author</th>
+                  <th>Comments</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
+                  <td>{{postInfo.ups}}</td>
+                  <td>{{postInfo.title}}</td>
+                  <td><img src="{{postInfo.image}}"></td>
+                  <td>{{postInfo.author}}</td>
+                  <td>{{postInfo.comments}}</td>
                 </tr>
                 <tr>
                   <td>1,002</td>
