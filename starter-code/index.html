@@ -10,9 +10,9 @@
     <script src="js/app.js"></script>
   </head>
 
-  <body>
+  <body ng-app="reddItApp">
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top" ng-controller="reddItCtrl">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -27,14 +27,14 @@
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#">Clear</a></li>
           </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
+          <form class="navbar-form navbar-right" ng-submit="search()">
+            <input type="text" class="form-control" placeholder="Search..." ng-model="searchTerm">
           </form>
         </div>
       </div>
     </nav>
 
-    <div class="container-fluid">
+    <div class="container-fluid" >
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <h4>History</h4>
