@@ -5,19 +5,23 @@ reddItApp.controller( 'reddItCtrl',['$scope', '$http', '$localStorage', function
   $scope.postInfo=[];
   $scope.history=[];
 
-  $scope.search = function(){
+  $scope.search = function(term){
+    if (term) {
+      $scope.searchTerm = term;
+    }
     $scope.saveData();
-
+    console.log($scope.searchTerm)
     var req = {
       url:'http://www.reddit.com/search.json?q='+ $scope.searchTerm,
       method:'GET'
     }
 
     $http(req).then(function success(res) {
-
+      console.log($scope.searchTerm)
       $scope.history.push($scope.searchTerm);
-      console.log("history = "+$scope.history);
+
       var redditData = res.data.data.children;
+      $scope.postInfo = [];
       for(var i=0;i<redditData.length;i++){
         $scope.postInfo.push(redditData[i].data)
         console.log($scope.postInfo)
