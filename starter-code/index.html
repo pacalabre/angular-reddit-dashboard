@@ -83,15 +83,15 @@
                   <th>Comments</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody ng-repeat="post in postInfo track by $index">
                 <tr>
-                  <td>{{postInfo[0].ups}}</td>
-                  <td>{{postInfo[0].title}}</td>
-                  <td><img src="{{postInfo[0].thumbnail}}"></td>
-                  <td>{{postInfo[0].author}}</td>
-                  <td>{{postInfo[0].num_comments}}</td>
+                  <td>{{post.ups}}</td>
+                  <td>{{post.title}}</td>
+                  <td><img src="{{post.thumbnail}}"></td>
+                  <td>{{post.author}}</td>
+                  <td>{{post.num_comments}}</td>
                 </tr>
-                <tr>
+                <!-- <tr>
                   <td>1,002</td>
                   <td>amet</td>
                   <td>consectetur</td>
@@ -195,7 +195,7 @@
                   <td>ligula</td>
                   <td>in</td>
                   <td>libero</td>
-                </tr>
+                </tr> -->
               </tbody>
             </table>
           </div>
