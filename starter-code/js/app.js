@@ -46,9 +46,10 @@ reddItApp.controller( 'reddItCtrl',['$scope', '$http', '$localStorage', function
     $scope.deleteFromLocalStorage = function(item) {
       $localStorage.searchHistory.splice($localStorage.searchHistory.indexOf(item), 1);
       localStorage.removeItem(item);
+
       // $localStorage.searchHistory.splice(id,1);
-      // delete $localStorage.small;
-      // delete $localStorage.big;
+      // delete $localStorage;
+
     }
 
   var init = function() {
