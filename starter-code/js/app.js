@@ -1,11 +1,13 @@
-var reddItApp = angular.module('reddItApp',[]);
+var reddItApp = angular.module('reddItApp',['ngStorage']);
 
-reddItApp.controller( 'reddItCtrl',['$scope', '$http', function($scope, $http){
+reddItApp.controller( 'reddItCtrl',['$scope', '$http', '$localStorage', function($scope, $http, $localStorage){
   $scope.searchTerm = '';
   $scope.postInfo=[];
   $scope.history=[];
 
   $scope.search = function(){
+    $scope.saveData();
+
     var req = {
       url:'http://www.reddit.com/search.json?q='+ $scope.searchTerm,
       method:'GET'
@@ -24,4 +26,17 @@ reddItApp.controller( 'reddItCtrl',['$scope', '$http', function($scope, $http){
       console.log(error);
     });
   }
+
+  $scope.saveData = function() {
+
+    var searchHistory = {
+      search: $scope.searchTerm
+    }
+    $localStorage.searchHistory = searchHistory;
+  }
+
+  var init = function() {
+    $scope.searchHistory = $localStorage.searchHistory;
+  }
+  init();
 }]);
