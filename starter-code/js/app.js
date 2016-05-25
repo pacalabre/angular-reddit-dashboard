@@ -2,13 +2,7 @@ var reddItApp = angular.module('reddItApp',[]);
 
 reddItApp.controller( 'reddItCtrl',['$scope', '$http', function($scope, $http){
   $scope.searchTerm = '';
-  $scope.postInfo= {
-    title: '',
-    author: '',
-    ups: '',
-    comments:'',
-    image:''
-  };
+  $scope.postInfo=[]
 
 
 
@@ -22,12 +16,14 @@ reddItApp.controller( 'reddItCtrl',['$scope', '$http', function($scope, $http){
       var redditData = res.data.data.children;
       console.log(redditData.length);
       for(var i=0;i<redditData.length;i++){
-        $scope.postInfo.title = redditData[i].data.title;
-        $scope.postInfo.author = redditData[i].data.author;
-        $scope.postInfo.ups = redditData[i].data.ups;
-        $scope.postInfo.comments = redditData[i].data.num_comments;
-        $scope.postInfo.image = redditData[i].data.thumbnail;
-        console.log($scope.postInfo.ups);
+        $scope.postInfo.push(redditData[i].data)
+        // $scope.postInfo.title = redditData[i].data.title;
+        // $scope.postInfo.author = redditData[i].data.author;
+        // $scope.postInfo.ups = redditData[i].data.ups;
+        // $scope.postInfo.comments = redditData[i].data.num_comments;
+        // $scope.postInfo.image = redditData[i].data.thumbnail;
+        // console.log($scope.postInfo.ups);
+        console.log($scope.postInfo)
       }
       console.log($scope.title);
       console.log(res.data.data.children);
