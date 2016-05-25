@@ -5,6 +5,10 @@ reddItApp.controller( 'reddItCtrl',['$scope', '$http', '$localStorage', function
   $scope.postInfo=[];
   $scope.history=[];
 
+  var searchHistory = {
+      search: $scope.searchTerm
+    }
+
   $scope.search = function(term){
     if (term) {
       $scope.searchTerm = term;
@@ -33,11 +37,19 @@ reddItApp.controller( 'reddItCtrl',['$scope', '$http', '$localStorage', function
 
   $scope.saveData = function() {
 
-    var searchHistory = {
-      search: $scope.searchTerm
-    }
+    // var searchHistory = {
+    //   search: $scope.searchTerm
+    // }
     $localStorage.searchHistory = searchHistory;
   }
+
+    $scope.deleteFromLocalStorage = function(item) {
+      $localStorage.searchHistory.splice($localStorage.searchHistory.indexOf(item), 1);
+      localStorage.removeItem(item);
+      // $localStorage.searchHistory.splice(id,1);
+      // delete $localStorage.small;
+      // delete $localStorage.big;
+    }
 
   var init = function() {
     $scope.searchHistory = $localStorage.searchHistory;
