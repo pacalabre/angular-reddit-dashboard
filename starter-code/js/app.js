@@ -4,6 +4,10 @@ reddItApp.controller( 'reddItCtrl',['$scope', '$http', '$localStorage', function
   $scope.searchTerm = '';
   $scope.postInfo=[];
   $scope.history=[];
+  if($localStorage.history){
+    $scope.history=$localStorage.history;
+  }
+  console.log($localStorage);
 
   var searchHistory = {
       search: $scope.searchTerm
@@ -13,22 +17,18 @@ reddItApp.controller( 'reddItCtrl',['$scope', '$http', '$localStorage', function
     if (term) {
       $scope.searchTerm = term;
     }
-    $scope.saveData();
-    console.log($scope.searchTerm)
     var req = {
       url:'http://www.reddit.com/search.json?q='+ $scope.searchTerm,
       method:'GET'
     }
 
     $http(req).then(function success(res) {
-      console.log($scope.searchTerm)
       $scope.history.push($scope.searchTerm);
-
+      $scope.saveData();
       var redditData = res.data.data.children;
       $scope.postInfo = [];
       for(var i=0;i<redditData.length;i++){
         $scope.postInfo.push(redditData[i].data)
-        console.log($scope.postInfo)
       }
     }, function error(error) {
       console.log(error);
@@ -36,21 +36,14 @@ reddItApp.controller( 'reddItCtrl',['$scope', '$http', '$localStorage', function
   }
 
   $scope.saveData = function() {
-
-    // var searchHistory = {
-    //   search: $scope.searchTerm
-    // }
-    $localStorage.searchHistory = searchHistory;
+    $localStorage.history = $scope.history;
+    console.log($localStorage);
   }
 
-    $scope.deleteFromLocalStorage = function(item) {
-      $localStorage.searchHistory.splice($localStorage.searchHistory.indexOf(item), 1);
-      localStorage.removeItem(item);
-
-      // $localStorage.searchHistory.splice(id,1);
-      // delete $localStorage;
-
-    }
+  $scope.deleteFromLocalStorage = function(item) {
+    $scope.history.splice(item, 1);
+    $scope.saveData();
+  }
 
   var init = function() {
     $scope.searchHistory = $localStorage.searchHistory;
